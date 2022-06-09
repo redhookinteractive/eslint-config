@@ -5,12 +5,12 @@ on:
 
 jobs:
   code-checks:
-    uses: redhook/eslint-config/.github/workflows/code-checks.yml@v1
+    uses: redhookinteractive/eslint-config/.github/workflows/code-checks.yml@v1
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
   publish-beta:
-    uses: redhook/eslint-config/.github/workflows/publish-beta.yml@v1
+    uses: redhookinteractive/eslint-config/.github/workflows/publish-beta.yml@v1
     needs: code-checks
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
