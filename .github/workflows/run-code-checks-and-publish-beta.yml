@@ -1,0 +1,16 @@
+name: Code Checks
+
+on:
+  pull_request:
+
+jobs:
+  code-checks:
+    uses: ./actions/code-checks
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+  publish-beta:
+    uses: ./actions/publish-beta
+    needs: code-checks
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

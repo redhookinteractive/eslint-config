@@ -1,0 +1,59 @@
+name: Delete Published Beta Packages
+
+on:
+  workflow_call:
+    inputs:
+      regex:
+        required: false
+        type: string
+
+jobs:
+  delete-beta-packages:
+    name: Delete beta packages
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: List packages
+        id: list-packages
+        uses: actions/github-script@v5
+        with:
+          result-encoding: string
+          script: |
+            // Get a list of the 100 most recent package versions.
+            // Query made with Github's GraphQL Explorer: https://docs.github.com/en/graphql/overview/explorer
+            const query = `query($owner:String!, $name:String!) {
+              repository(owner:$owner, name:$name){
+                packages(first: 1) {
+                  nodes {
+                    versions(first: 100) {
+                      nodes {
+                        id
+                        version
+                      }
+                    }
+                  }
+                }
+              }
+            }`;
+            const variables = {
+              owner: context.repo.owner,
+              name: context.repo.repo,
+            };
+            const result = await github.graphql(query, variables);
+            // Grab the array of objects, containing the `id` and `version` for each package version in this repo.
+            const allPackageVersions = result.repository.packages.nodes[0].versions.nodes;
+            const versionRegex = /beta|pr${{ github.event.number }}/;
+            // Filter the array for just the beta package versions we want to delete.
+            const packageVersionsToDelete = allPackageVersions.filter((packageVersion) =>
+              packageVersion.version.match(versionRegex)
+            );
+            const versionIds = packageVersionsToDelete.map((version) => version.id);
+            console.log(`Found versions to delete, matching the regex ${versionRegex}:`);
+            console.table(packageVersionsToDelete, ["id", "version"]);
+            // Return as a comma-separated string, as wanted by the actions/delete-package-versions.
+            return versionIds.join(",");
+      - name: Delete packages
+        uses: actions/delete-package-versions@v2
+        with:
+          package-version-ids: ${{ steps.list-packages.outputs.result }}
