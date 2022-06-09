@@ -10,6 +10,10 @@
     "prepare": "husky install",
     "postinstall": "husky install"
   },
+  "keywords": [
+    "eslint",
+    "eslint-config"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redhookinteractive/eslint-config.git"
