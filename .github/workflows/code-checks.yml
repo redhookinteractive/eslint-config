@@ -1,0 +1,29 @@
+name: Code Checks
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - '*'
+
+jobs:
+  code-checks:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          registry-url: https://npm.pkg.github.com/
+          scope: "@redhook"
+      - name: Install dependencies
+        run: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Lint
+        run: npm run lint
