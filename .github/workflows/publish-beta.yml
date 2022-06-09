@@ -40,7 +40,7 @@ jobs:
           echo "Publishing with:"
           echo "  tag: $TAG"
           echo "  dist-tag: $DIST_TAG"
-          npm publish --tag $DIST_TAG
+          yarn publish --tag $DIST_TAG
           # Set step outputs, to reference later in the job outputs.
           echo "::set-output name=commit::$COMMIT"
           echo "::set-output name=dist-tag::$DIST_TAG"
