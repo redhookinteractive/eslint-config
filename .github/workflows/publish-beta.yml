@@ -26,7 +26,7 @@ jobs:
       - name: Publish beta package
         id: publish-beta-package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: |
           COMMIT=$(echo ${{ github.event.pull_request.head.sha }} | cut -c 1-7)
           PR=pr${{ github.event.number }}
@@ -36,7 +36,7 @@ jobs:
           DIST_TAG=$PR
           # Bump the version in the package.json and package-lock.json, but don't commit it.
           npm version --no-git-tag-version $TAG
-          # Then publish the tag and dist-tag to Github Packages.
+          # Then publish the tag and dist-tag to NPM Packages.
           echo "Publishing with:"
           echo "  tag: $TAG"
           echo "  dist-tag: $DIST_TAG"
