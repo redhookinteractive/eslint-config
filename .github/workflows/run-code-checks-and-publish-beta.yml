@@ -5,12 +5,12 @@ on:
 
 jobs:
   code-checks:
-    uses: ./.github/actions/code-checks.yml
+    uses: redhook/eslint-config/.github/actions/code-checks.yml@v1
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
   publish-beta:
-    uses: ./.github/actions/publish-beta.yml
+    uses: redhook/eslint-config/.github/actions/publish-beta.yml@v1
     needs: code-checks
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
