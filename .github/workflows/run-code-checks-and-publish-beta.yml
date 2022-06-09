@@ -5,12 +5,12 @@ on:
 
 jobs:
   code-checks:
-    uses: ./.github/workflows/code-checks.yml@v1
+    uses: ./.github/workflows/code-checks.yml
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
   publish-beta:
-    uses: .github/workflows/publish-beta.yml@v1
+    uses: .github/workflows/publish-beta.yml
     needs: code-checks
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
