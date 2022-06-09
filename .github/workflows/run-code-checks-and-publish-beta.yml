@@ -5,12 +5,12 @@ on:
 
 jobs:
   code-checks:
-    uses: ./actions/code-checks
+    uses: ./.github/actions/code-checks
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
   publish-beta:
-    uses: ./actions/publish-beta
+    uses: ./.github/actions/publish-beta
     needs: code-checks
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
