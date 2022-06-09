@@ -39,7 +39,6 @@ jobs:
           echo "Publishing with:"
           echo "  tag: $TAG"
           echo "  dist-tag: $DIST_TAG"
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> .npmrc
           npm publish --access public --tag $DIST_TAG
           # Set step outputs, to reference later in the job outputs.
           echo "::set-output name=commit::$COMMIT"
