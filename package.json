@@ -19,7 +19,7 @@
     "url": "git+https://github.com/redhookinteractive/eslint-config.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@redhook"
+    "registry": "https://npm.pkg.github.com/"
   },
   "author": "Red Hook Interactive",
   "license": "ISC",
