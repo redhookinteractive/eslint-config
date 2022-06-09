@@ -18,6 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/redhookinteractive/eslint-config.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "Red Hook Interactive",
   "license": "ISC",
   "bugs": {
