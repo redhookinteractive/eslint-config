@@ -21,7 +21,6 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          registry-url: https://npm.pkg.github.com/
           scope: "@redhookinteractive"
           node-version-file: ".nvmrc"
       - name: Install dependencies
