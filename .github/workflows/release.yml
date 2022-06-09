@@ -101,7 +101,7 @@ jobs:
           prerelease: false
 
   publish-to-github:
-    name: Publish to GitHub Packages
+    name: Publish to NPM Packages
     needs:
       - bump-version
     runs-on: ubuntu-latest
@@ -114,7 +114,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           registry-url: https://npm.pkg.github.com
-          scope: "@redhook"
+          scope: "@redhookinteractive"
       - name: Install dependencies
         run: yarn --immutable --imutable-cache
         env:

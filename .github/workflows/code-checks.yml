@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           registry-url: https://npm.pkg.github.com/
-          scope: "@redhook"
+          scope: "@redhookinteractive"
           node-version-file: ".nvmrc"
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
