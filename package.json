@@ -1,5 +1,5 @@
 {
-  "name": "@redhook/eslint-config",
+  "name": "@redhookinteractive/eslint-config",
   "version": "1.0.0",
   "description": "Eslint configuration package to maintain code standards for React, React Native, and node projects.",
   "main": "index.js",
