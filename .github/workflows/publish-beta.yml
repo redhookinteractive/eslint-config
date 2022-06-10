@@ -75,6 +75,6 @@ jobs:
             The code at commit ${{ needs.publish.outputs.commit }} was published with the tag `${{ needs.publish.outputs.tag }}` and the dist-tag `${{ needs.publish.outputs.dist-tag }}`.
             You can install this beta and all others auto-published in this PR by referring to the dist-tag:
             ```
-            yarn add @${{ github.repository }}@${{ needs.publish.outputs.dist-tag }}
+            yarn add @redhook/eslint-config@${{ needs.publish.outputs.dist-tag }}
             ```
           edit-mode: replace
