@@ -77,4 +77,8 @@ jobs:
             ```
             yarn add @${{ github.repository }}@${{ needs.publish.outputs.dist-tag }}
             ```
+
+            ```
+            yarn add @${{ github.repository }}@${{ needs.publish.outputs.dist-tag }} --ignore-workspace-root-check
+            ```
           edit-mode: replace

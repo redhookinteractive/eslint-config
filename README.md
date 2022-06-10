@@ -48,7 +48,7 @@ To install the react-native package:
 ```js
 module.exports = {
   extends: [
-    '@redhook/eslint-config/react',
+    '@redhook/eslint-config/react-native',
   ],
 };
 ```
