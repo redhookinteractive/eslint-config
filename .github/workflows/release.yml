@@ -113,7 +113,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          scope: "@redhookinteractive"
+          scope: "@redhook"
       - name: Install dependencies
         run: yarn --immutable --imutable-cache
         env:

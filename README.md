@@ -1,4 +1,4 @@
-# @redhookinteractive/eslint-config
+# @redhook/eslint-config
 
 An eslint configuration that will allow projects to have consistent code quality and standards. It exports configurations for node, react, react-native, and a common package that can be used more generally.
 
@@ -8,7 +8,7 @@ An eslint configuration that will allow projects to have consistent code quality
 
 ```bash
 # from the project you're trying to add it to
-yarn add @redhookinteractive/eslint-config -D
+yarn add @redhook/eslint-config -D
 ```
 
 ### Add the package in your .eslintrc.js file
@@ -18,7 +18,7 @@ To install the common package:
 ```js
 module.exports = {
   extends: [
-    '@redhookinteractive/eslint-config',
+    '@redhook/eslint-config',
   ],
 };
 ```
@@ -28,7 +28,7 @@ To install the node package:
 ```js
 module.exports = {
   extends: [
-    '@redhookinteractive/eslint-config/node',
+    '@redhook/eslint-config/node',
   ],
 };
 ```
@@ -38,7 +38,7 @@ To install the react package:
 ```js
 module.exports = {
   extends: [
-    '@redhookinteractive/eslint-config/react',
+    '@redhook/eslint-config/react',
   ],
 };
 ```
@@ -48,7 +48,7 @@ To install the react-native package:
 ```js
 module.exports = {
   extends: [
-    '@redhookinteractive/eslint-config/react-native',
+    '@redhook/eslint-config/react-native',
   ],
 };
 ```

@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          scope: "@redhookinteractive"
+          scope: "@redhook"
           node-version-file: ".nvmrc"
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
