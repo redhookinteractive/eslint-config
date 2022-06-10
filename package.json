@@ -6,9 +6,7 @@
   "scripts": {
     "deploy": "npm publish",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prepare": "husky install",
-    "postinstall": "husky install"
+    "lint:fix": "eslint --fix ."
   },
   "keywords": [
     "eslint",
