@@ -1,0 +1,80 @@
+name: Publish beta package
+
+on:
+  workflow_call:
+    secrets:
+      NODE_AUTH_TOKEN:
+        required: true
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          scope: "@redhook"
+          node-version-file: ".nvmrc"
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Publish beta package
+        id: publish-beta-package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN}}
+        run: |
+          COMMIT=$(echo ${{ github.event.pull_request.head.sha }} | cut -c 1-7)
+          PR=pr${{ github.event.number }}
+          VERSION=$(jq --raw-output .version package.json)
+          # Make a package number in the format: 0.1.0-pr1-abcd123
+          TAG=$VERSION-$PR-$COMMIT
+          DIST_TAG=$PR
+          # Bump the version in the package.json and package-lock.json, but don't commit it.
+          npm version --no-git-tag-version $TAG
+          # Then publish the tag and dist-tag to NPM Packages.
+          echo "Publishing with:"
+          echo "  tag: $TAG"
+          echo "  dist-tag: $DIST_TAG"
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NODE_AUTH_TOKEN }}
+          npm publish --tag $DIST_TAG
+          # Set step outputs, to reference later in the job outputs.
+          echo "::set-output name=commit::$COMMIT"
+          echo "::set-output name=dist-tag::$DIST_TAG"
+          echo "::set-output name=tag::$TAG"
+    # Set outputs at the job level, to reference in the comment job below.
+    outputs:
+      commit: ${{ steps.publish-beta-package.outputs.commit }}
+      dist-tag: ${{ steps.publish-beta-package.outputs.dist-tag }}
+      tag: ${{ steps.publish-beta-package.outputs.tag }}
+
+  comment:
+    name: Comment
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: Code Checks just completed successfully
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Code Checks just completed successfully, and a beta package was published. 🎉
+            The code at commit ${{ needs.publish.outputs.commit }} was published with the tag `${{ needs.publish.outputs.tag }}` and the dist-tag `${{ needs.publish.outputs.dist-tag }}`.
+            You can install this beta and all others auto-published in this PR by referring to the dist-tag:
+            ```
+            yarn add @redhook/eslint-config@${{ needs.publish.outputs.dist-tag }}
+            ```
+          edit-mode: replace
