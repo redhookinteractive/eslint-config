@@ -28,7 +28,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
-    "import/no-default-export": "error",
+    "import/no-default-export": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react/forbid-prop-types": "warn",

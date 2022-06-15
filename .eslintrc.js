@@ -9,7 +9,7 @@ module.exports = {
         "import/no-extraneous-dependencies": "off",
         "import/no-self-import": "off",
         "import/no-unresolved": "off",
-        "import/no-useless-path-segments": "off",
+        "import/no-useless-path-segments": "off"
       },
     },
   ],
