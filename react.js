@@ -4,7 +4,7 @@ module.exports = {
     jest: true,
     node: true,
   },
-  extends: ["airbnb", "./common"],
+  extends: ["airbnb", "airbnb/hooks", "./common"],
   overrides: [
     {
       extends: ["eslint:recommended", "plugin:prettier/recommended"],
@@ -28,7 +28,6 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
-    "import/no-default-export": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "no-param-reassign": [
