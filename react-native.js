@@ -3,5 +3,5 @@ module.exports = {
     "react-native/react-native": true,
   },
   extends: ["./react"],
-  plugins: ['react-native']
+  plugins: ["react-native"],
 };
