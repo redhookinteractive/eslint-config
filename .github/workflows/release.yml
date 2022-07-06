@@ -16,8 +16,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
+          repository: redhookinteractive/eslint-config
           token: ${{ secrets.NODE_AUTH_TOKEN }}
-          submodules: recursive
+          path: eslint-config
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
