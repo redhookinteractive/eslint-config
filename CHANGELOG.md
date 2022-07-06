@@ -4,6 +4,6 @@
 
 ### Features
 
-- AP4P-362: Updated github actions and added more eslint features.
+- JIRA-123: Added this feature.
 
 ### Bug Fixes
