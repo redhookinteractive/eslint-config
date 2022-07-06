@@ -64,7 +64,6 @@ module.exports = {
       },
     ],
     "import/order": "off",
-    "import/prefer-default-export": "off",
     "lines-between-class-members": ["error", "always"],
     "no-shadow": "off",
     "no-unused-expressions": [
